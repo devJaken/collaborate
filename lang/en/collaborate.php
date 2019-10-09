@@ -42,6 +42,7 @@ $string['collaboratename_help'] = 'This is the content of the help tooltip assoc
 $string['collaborate'] = 'collaborate';
 $string['pluginadministration'] = 'collaborate administration';
 $string['pluginname'] = 'collaborate';
+$string['pageviewed'] = 'mod_collaborate';
 
 // Mod form specific collaborate settings.
 $string['title'] = 'Activity Title: ';
