@@ -26,7 +26,7 @@
  * @see https://github.com/moodlehq/moodle-mod_collaborate
  * @see https://github.com/justinhunt/moodle-mod_collaborate */
 
-use \collaborate\local\collaborate_editor;
+use \mod_collaborate\local\collaborate_editor;
 
 defined('MOODLE_INTERNAL') || die();
 
