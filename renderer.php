@@ -47,6 +47,12 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         $data->body = format_module_intro('collaborate',
                 $collaborate, $cm->id);
 
+		// Set up the user page URLs.
+		$a = new \moodle_url('/mod/collaborate/showpage.php', ['cid' => $collaborate->id, 'page' => 'a']);
+		$b = new \moodle_url('/mod/collaborate/showpage.php', ['cid' => $collaborate->id, 'page' => 'b']);
+		$data->url_a = $a->out(false);
+		$data->url_b = $b->out(false);
+
         // Display the view page content.
         echo $this->output->header();
         echo $this->render_from_template('mod_collaborate/view', $data);
