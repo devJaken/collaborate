@@ -43,6 +43,7 @@ $string['collaborate'] = 'collaborate';
 $string['pluginadministration'] = 'collaborate administration';
 $string['pluginname'] = 'collaborate';
 $string['pageviewed'] = 'mod_collaborate';
-
 // Mod form specific collaborate settings.
 $string['title'] = 'Activity Title: ';
+$string['texteditor'] = 'Instructions {$a}';
+

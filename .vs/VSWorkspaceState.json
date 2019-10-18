@@ -2,7 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\classes",
-    "\\classes\\local"
+    "\\classes\\local",
+    "\\lang",
+    "\\lang\\en"
   ],
+  "SelectedNode": "\\classes\\local\\collaborate_editor.php",
   "PreviewInSolutionExplorer": false
 }
