@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    "\\lang\\en"
+    "",
+    "\\classes",
+    "\\classes\\event",
+    "\\classes\\local"
   ],
+  "SelectedNode": "\\mod_form.php",
   "PreviewInSolutionExplorer": false
 }
