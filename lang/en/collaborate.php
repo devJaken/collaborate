@@ -49,4 +49,5 @@ $string['texteditor'] = 'Instructions {$a}';
 // User button labels.
 $string['studenta'] = 'Partner A';
 $string['studentb'] = 'Partner B';
+$string['returnview'] = 'Back to main page';
 
