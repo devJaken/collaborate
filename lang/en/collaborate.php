@@ -51,3 +51,15 @@ $string['studenta'] = 'Partner A';
 $string['studentb'] = 'Partner B';
 $string['returnview'] = 'Back to main page';
 
+
+// Tabs on reports and view.
+$string['viewtab'] = 'View';
+$string['reportstab'] = 'Reports';
+// Capability strings.
+$string['collaborate:addinstance'] = 'Add a new Collaborate activity';
+$string['collaborate:view'] = 'Add a new Super frame block to my moodle';
+$string['collaborate:viewreportstab'] = 'View block page';
+// Submissions form.
+$string['submission'] = 'Your submission';
+$string['submissionsave'] = 'Save submission';
+$string['submissionupdated'] = 'Your submission was updated';

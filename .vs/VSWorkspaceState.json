@@ -1,10 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\classes",
     "\\classes\\event",
-    "\\classes\\local"
+    "\\classes\\local",
+    "\\db",
+    "\\lang",
+    "\\lang\\en",
+    "\\templates"
   ],
-  "SelectedNode": "\\mod_form.php",
+  "SelectedNode": "\\lang\\en\\collaborate.php",
   "PreviewInSolutionExplorer": false
 }

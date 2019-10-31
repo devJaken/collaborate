@@ -47,11 +47,23 @@ class mod_collaborate_renderer extends plugin_renderer_base {
 	    $data->body = format_module_intro('collaborate',
 	            $collaborate, $cm->id);
 
+		// Show reports tab?
+        $data->reportstab = $reportstab;
+
 	    // Set up the user page URLs.
 	    $a = new \moodle_url('/mod/collaborate/showpage.php', ['cid' => $collaborate->id, 'page' => 'a']);
 	    $b = new \moodle_url('/mod/collaborate/showpage.php', ['cid' => $collaborate->id, 'page' => 'b']);
 	    $data->url_a = $a->out(false);
 	    $data->url_b = $b->out(false);
+
+		// Add links to reports tabs, if enabled.
+        if ($reportstab) {
+            $r = new \moodle_url('/mod/collaborate/reports.php',
+                    ['cid' => $collaborate->id]);
+            $v = new \moodle_url('/mod/collaborate/view.php', ['id' => $cm->id]);
+            $data->url_reports = $r->out(false);
+            $data->url_view = $v->out(false);
+        }
 
 	    // Display the view page content.
 	    echo $this->output->header();
