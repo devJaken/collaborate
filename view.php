@@ -82,7 +82,6 @@ if ($config->enablereports) {
         $reportstab = true;
     }
 }
-
 // New parameter to determine status of tabs.
 $renderer->render_view_page_content($collaborate, $cm, $reportstab);
 

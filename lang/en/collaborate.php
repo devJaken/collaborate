@@ -30,36 +30,41 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'collaborate';
-$string['modulenameplural'] = 'collaborates';
+$string['modulename'] = 'Collaborate';
+$string['modulenameplural'] = 'Collaborations';
 $string['modulename_help'] = 'Use the collaborate module for... | The collaborate module allows...';
-$string['collaborate:addinstance'] = 'Add a new collaborate';
-$string['collaborate:submit'] = 'Submit collaborate';
-$string['collaborate:view'] = 'View collaborate';
-$string['collaborate:viewreportstab'] = 'View reports';
 $string['collaboratefieldset'] = 'Custom example fieldset';
 $string['collaboratename'] = 'collaborate name';
 $string['collaboratename_help'] = 'This is the content of the help tooltip associated with the collaboratename field. Markdown syntax is supported.';
 $string['collaborate'] = 'collaborate';
 $string['pluginadministration'] = 'collaborate administration';
 $string['pluginname'] = 'collaborate';
-$string['pageviewed'] = 'mod_collaborate';
+
 // Mod form specific collaborate settings.
 $string['title'] = 'Activity Title: ';
 $string['texteditor'] = 'Instructions {$a}';
+
+// Admin settings strings.
+$string['enablereports'] = 'Enable reports: ';
+$string['enablereports_desc'] = 'Allow teachers to see the reports tab';
+
+// Event strings.
+$string['pageviewed'] = 'Page viewed';
+
 // User button labels.
 $string['studenta'] = 'Partner A';
 $string['studentb'] = 'Partner B';
 $string['returnview'] = 'Back to main page';
 
-
 // Tabs on reports and view.
 $string['viewtab'] = 'View';
 $string['reportstab'] = 'Reports';
+
 // Capability strings.
 $string['collaborate:addinstance'] = 'Add a new Collaborate activity';
 $string['collaborate:view'] = 'Add a new Super frame block to my moodle';
 $string['collaborate:viewreportstab'] = 'View block page';
+
 // Submissions form.
 $string['submission'] = 'Your submission';
 $string['submissionsave'] = 'Save submission';
