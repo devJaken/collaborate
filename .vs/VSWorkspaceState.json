@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\lang\\en"
   ],
-  "SelectedNode": "\\renderer.php",
+  "SelectedNode": "\\lang",
   "PreviewInSolutionExplorer": false
 }
