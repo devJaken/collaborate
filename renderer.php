@@ -38,7 +38,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
      * @param $cm the course module std Object
      * @return none
      */
-	public function render_view_page_content($collaborate, $cm, $reportstab) {
+	public function render_view_page_content($collaborate, $cm, $reportstab=true) {
 
 	    $data = new stdClass();
 
