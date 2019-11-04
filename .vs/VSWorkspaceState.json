@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\lang\\en"
+    "\\classes",
+    "\\classes\\local",
+    "\\lang\\en",
+    "\\templates"
   ],
-  "SelectedNode": "\\lang",
   "PreviewInSolutionExplorer": false
 }
