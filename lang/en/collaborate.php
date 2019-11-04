@@ -69,3 +69,7 @@ $string['collaborate:viewreportstab'] = 'View block page';
 $string['submission'] = 'Your submission';
 $string['submissionsave'] = 'Save submission';
 $string['submissionupdated'] = 'Your submission was updated';
+
+// Submissions form.
+$string['submission'] = 'Your submission';
+$string['submissionsave'] = 'Save submission';

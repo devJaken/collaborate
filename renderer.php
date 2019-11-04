@@ -101,6 +101,9 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         $format = ($page == 'a') ? $collaborate->instructionsaformat : $collaborate->instructionsbformat;
         $data->body = format_text($content, $format, $formatoptions);
 
+		// Get the form html.
+        $data->form = $form->render();
+
         $urlv = new \moodle_url('/mod/collaborate/view.php', ['id' => $cm->id]);
         $data->url_view = $urlv->out(false);
 
