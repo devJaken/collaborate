@@ -80,7 +80,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
      * @param object $form the submission forms object
      * @return none
      */
-	public function render_page_content($collaborate, $cm, $page) {
+	public function render_page_content($collaborate, $cm, $page, $form) {
 
          $data = new stdClass();
 
