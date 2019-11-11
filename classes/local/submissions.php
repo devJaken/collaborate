@@ -55,4 +55,46 @@ class submissions {
         global $DB;
         return $DB->get_record('collaborate_submissions', ['collaborateid' => $cid, 'userid' => $userid, 'page' => $page], '*', IGNORE_MISSING);
     }
+
+	/**
+     * Set the headers to match the sql query and required report fields.
+     *
+     * @return string array of report column headers.
+     */
+    public static function get_submission_record_headers() {
+        return [
+            get_string('id', 'mod_collaborate'),
+            get_string('title', 'mod_collaborate'),
+            get_string('submission','mod_collaborate'),
+            get_string('firstname', 'mod_collaborate'),
+            get_string('lastname', 'mod_collaborate'),
+            get_string('grade',  'mod_collaborate')];
+    }
+
+	/**
+     * Set the headers to match the sql query and required report fields.
+     *
+     * @param int $cid our collaborate instance id.
+     * @return An array of records
+     */
+    public static function get_submission_records($cid) {
+        global $DB;
+        $records = $DB->get_records('collaborate_submissions', ['collaborateid' => $cid]);
+        $collaborate = $DB->get_record('collaborate', ['id' => $cid], '*', MUST_EXIST);
+        $submissions = array();
+        foreach ($records as $record) {
+            $data = array();
+            $data['id'] = $record->id;
+            $data['title'] = $collaborate->title;
+            $s = \format_string($record->submission);
+            $s = \strip_tags($s);
+            $data['submission'] = $s;
+            $user = $DB->get_record('user', ['id' => $record->userid], '*', MUST_EXIST);
+            $data['firstname'] = $user->firstname;
+            $data['lastname'] = $user->lastname;
+            $data['grade'] = $record->grade;
+            $submissions[] = $data;
+        }
+        return $submissions;
+    }
 }

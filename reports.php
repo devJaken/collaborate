@@ -43,9 +43,24 @@ $PAGE->set_title(format_string($collaborate->name));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_pagelayout('course');
 
-// Prevent direct acess to the url.
-require_capability('mod/collaborate:viewreportstab', $context);
+// Prevent direct access to the url.
+require_capability('mod/collaborate:viewreportstab');
 
-$OUTPUT->header();
-echo 'reports';
-$OUTPUT->footer();
+// Show reports tab if permission exists and admin has allowed.
+$reportstab = false;
+
+$config = get_config('mod_collaborate');
+
+if ($config->enablereports) {
+    if (has_capability('mod/collaborate:viewreportstab', $context)) {
+        $reportstab = true;
+    }
+}
+
+// Get the data on submissions that's to be reported.
+$submissions = submissions::get_submission_records($cid, $context);
+$headers = submissions::get_submission_record_headers();
+
+// Call our renderer to prepare the output.
+$renderer = $PAGE->get_renderer('mod_collaborate');
+$renderer->render_reports_page_content($collaborate, $cm, $submissions, $headers, $reportstab);

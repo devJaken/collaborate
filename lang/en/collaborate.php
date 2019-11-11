@@ -73,3 +73,12 @@ $string['submissionupdated'] = 'Your submission was updated';
 // Submissions form.
 $string['submission'] = 'Your submission';
 $string['submissionsave'] = 'Save submission';
+
+// Strings for usubmission report.
+$string['submissions'] = 'List of submissions';
+$string['id'] = 'ID';
+$string['title'] = 'Title';
+$string['submission'] = 'Submission text (part)';
+$string['firstname'] = 'First name';
+$string['lastname'] = 'Last name';
+$string['grade'] = 'Grade';
