@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\classes",
-    "\\classes\\local",
-    "\\lang\\en",
-    "\\templates"
+    "\\lang",
+    "\\lang\\en"
   ],
+  "SelectedNode": "\\renderer.php",
   "PreviewInSolutionExplorer": false
 }
