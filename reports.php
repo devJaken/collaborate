@@ -22,6 +22,7 @@
  * @see https://github.com/moodlehq/moodle-mod_collaborate
  * @see https://github.com/justinhunt/moodle-mod_collaborate */
 
+use \mod_collaborate\local\submissions;
 require_once('../../config.php');
 
 // The collaborate instance id.
@@ -43,19 +44,8 @@ $PAGE->set_title(format_string($collaborate->name));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_pagelayout('course');
 
-// Prevent direct access to the url.
-require_capability('mod/collaborate:viewreportstab');
-
-// Show reports tab if permission exists and admin has allowed.
-$reportstab = false;
-
-$config = get_config('mod_collaborate');
-
-if ($config->enablereports) {
-    if (has_capability('mod/collaborate:viewreportstab', $context)) {
-        $reportstab = true;
-    }
-}
+// Prevent direct acess to the url.
+require_capability('mod/collaborate:viewreportstab', $context);
 
 // Get the data on submissions that's to be reported.
 $submissions = submissions::get_submission_records($cid, $context);
