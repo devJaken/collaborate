@@ -16,9 +16,9 @@
 }}
 
 {{!
-    @template mod_collaborate/pagerow
+    @template mod_collaborate/reports
 
-    Moodle renders a simple view page with tabs
+    Moodle renders a simple reports page
 
     Classes required for JS:
     * none
@@ -31,13 +31,19 @@
 
         }
 }}
-
-<tr class="danger">
-  <td>{{id}}</td>
-  <td>{{title}}</td>
-  <td>{{#shortentext}} 120, {{submission}} {{/shortentext}}</td>
-  <td>{{firstname}}</td>
-  <td>{{lastname}}</td>
-  <td>{{grade}}</td>
-  <td><a href="{{gradelink}}">{{gradetext}}</a></td>
-</tr>
+<div class="container">
+  <h1>{{pageheader}}</h1>
+  <h3>{{title}}</h3>
+  <div class="card bg-primary text-light">
+    <div class="card-body">
+        <h3>{{# str }} user, mod_collaborate {{/ str }} {{firstname}} {{lastname}}<br /></h3>
+        <h3>{{# str }} currentgrade, mod_collaborate {{/ str }} {{grade}}<br /></h3>
+    </div>
+  </div>
+  <div class="card bg-light">
+    <div class="card-body ">
+        {{{submission}}}<br />
+    </div>
+  </div>
+  <br />
+</div>

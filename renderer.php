@@ -141,4 +141,28 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         echo $this->output->footer();
     }
 
+	public function render_submission_to_grade($submission, $context, $cid, $sid) {
+
+        $data = new stdClass();
+        $data->pageheader =  get_string('gradingheader', 'mod_collaborate');
+        $data->title = $submission->title;
+        $data->firstname = $submission->firstname;
+        $data->lastname = $submission->lastname;
+        $data->grade = $submission->grade;
+        // Submission.
+        $content = file_rewrite_pluginfile_urls($submission->submission, 'pluginfile.php', $context->id,
+                'mod_collaborate', 'submissions', $sid);
+
+        // Format submission.
+        $formatoptions = new stdClass;
+        $formatoptions->noclean = true;
+        $formatoptions->overflowdiv = true;
+        $formatoptions->context = $context;
+        $format = $submission->submission;
+        $data->submission = format_text($content, $format, $formatoptions);
+
+        return $this->render_from_template('mod_collaborate/submissiontograde', $data);
+
+    }
+
 }
