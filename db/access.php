@@ -68,7 +68,8 @@ $capabilities = array(
             'user' => CAP_ALLOW,
         )
     ),
-	'mod/collaborate:viewreportstab' => array (
+
+    'mod/collaborate:viewreportstab' => array (
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
@@ -77,8 +78,9 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
         'clonepermissionsfrom' => 'moodle/course:manageactivities'
-),
-'mod/collaborate:gradesubmission' => array (
+    ),
+
+    'mod/collaborate:gradesubmission' => array (
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
