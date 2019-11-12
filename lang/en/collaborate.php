@@ -64,24 +64,20 @@ $string['reportstab'] = 'Reports';
 $string['collaborate:addinstance'] = 'Add a new Collaborate activity';
 $string['collaborate:view'] = 'Add a new Super frame block to my moodle';
 $string['collaborate:viewreportstab'] = 'View block page';
+$string['collaborate:gradesubmission'] = 'Grade a submission';
 
-// Submissions form.
-$string['submission'] = 'Your submission';
+// Submissions.
 $string['submissionsave'] = 'Save submission';
-$string['submissionupdated'] = 'Your submission was updated';
-
-// Submissions form.
 $string['submission'] = 'Your submission';
-$string['submissionsave'] = 'Save submission';
+$string['submissionupdated'] = 'Submission updated';
 
-// Strings for usubmission report.
+// Strings for submission report.
 $string['submissions'] = 'List of submissions';
 $string['id'] = 'ID';
 $string['title'] = 'Title';
 $string['submission'] = 'Submission text (part)';
 $string['firstname'] = 'First name';
 $string['lastname'] = 'Last name';
-$string['grade'] = 'Grade';
 
 // Grading form.
 $string['grade'] = 'Grade';

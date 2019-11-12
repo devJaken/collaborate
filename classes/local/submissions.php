@@ -1,4 +1,19 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Class for handling student submissions.
  *
@@ -11,6 +26,7 @@ use \mod_collaborate\local\collaborate_editor;
 use \mod_collaborate\local\debugging;
 use \mod_collaborate\local\submission_form;
 defined('MOODLE_INTERNAL') || die();
+
 class submissions {
     /**
      * Add a submission record to the DB.
@@ -22,12 +38,16 @@ class submissions {
      */
     public static function save_submission($data, $context, $cid, $page) {
         global $DB, $USER;
+
         $exists = self::get_submission($cid, $USER->id, $page);
+
         if($exists) {
             $DB->delete_records('collaborate_submissions',
                     ['collaborateid' => $cid, 'userid' => $USER->id, 'page' => $page]);
         }
+
         $options = collaborate_editor::get_editor_options($context);
+
         // Insert a dummy record and get the id.
         $data->timecreated = time();
         $data->timemodified = time();
@@ -38,6 +58,7 @@ class submissions {
         $data->submissionformat = FORMAT_HTML;
         $dataid = $DB->insert_record('collaborate_submissions', $data);
         $data->id = $dataid;
+
         // Massage the data into a form for saving.
         $data = file_postupdate_standard_editor(
                 $data,
@@ -47,16 +68,20 @@ class submissions {
                 'mod_collaborate',
                 'submission',
                 $data->id);
+
         // Update the record with full editor data.
         $DB->update_record('collaborate_submissions', $data);
+
         return $data->id;
     }
+
     public static function get_submission($cid, $userid, $page) {
         global $DB;
+
         return $DB->get_record('collaborate_submissions', ['collaborateid' => $cid, 'userid' => $userid, 'page' => $page], '*', IGNORE_MISSING);
     }
 
-	/**
+    /**
      * Set the headers to match the sql query and required report fields.
      *
      * @return string array of report column headers.
@@ -70,9 +95,8 @@ class submissions {
             get_string('lastname', 'mod_collaborate'),
             get_string('grade',  'mod_collaborate')];
     }
-
-	/**
-     * Set the headers to match the sql query and required report fields.
+    /**
+     * Return an array of records from the submissions table
      *
      * @param int $cid our collaborate instance id.
      * @return An array of records
@@ -93,19 +117,41 @@ class submissions {
             $data['firstname'] = $user->firstname;
             $data['lastname'] = $user->lastname;
             $data['grade'] = $record->grade;
-			 $data['grade'] = ($record->grade == 0) ? '-' : $record->grade;
+            $data['grade'] = ($record->grade == 0) ? '-' : $record->grade;
 
             // Add a URL to the grading page.
-                   $g = new \moodle_url('/mod/collaborate/grading.php', ['cid' => $collaborate->id, 
-                           'sid' => $record->id]);
-                   $data['gradelink'] = $g->out(false);
-                   $data['gradetext'] = get_string('grade', 'mod_collaborate');
+            $g = new \moodle_url('/mod/collaborate/grading.php', ['cid' => $collaborate->id, 'sid' => $record->id]);
+            $data['gradelink'] = $g->out(false);
+            $data['gradetext'] = get_string('grade', 'mod_collaborate');
+
             $submissions[] = $data;
         }
         return $submissions;
     }
-
-	public static function update_grade($sid, $grade) {
+    /**
+     * Get a user submission given its id.
+     * @param int $sid the submission id
+     * @return object the required record
+     */
+    public static function get_submission_to_grade($collaborate, $sid) {
+        global $DB;
+        $record = $DB->get_record('collaborate_submissions', ['id' => $sid], '*', MUST_EXIST);
+        $data = new \stdClass();
+        $data->title = $collaborate->title;
+        $data->submission = $record->submission;
+        $user = $DB->get_record('user', ['id' => $record->userid], '*', MUST_EXIST);
+        $data->firstname = $user->firstname;
+        $data->lastname = $user->lastname;
+        $data->grade = $record->grade;
+        return $data;
+    }
+    /**
+     * Update the submission grade.
+     * @param int $sid the submission id
+     * @param int $grade - the new grade.
+     * @return none
+     */
+    public static function update_grade($sid, $grade) {
         global $DB;
         $DB->set_field('collaborate_submissions', 'grade', $grade, ['id' => $sid]);
     }
