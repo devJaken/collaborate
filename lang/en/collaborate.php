@@ -89,3 +89,6 @@ $string['grade_saved'] = 'Grade saved';
 
 //Week 7 module name change
 $string['namechange'] = 'Change module name';
+$string['week'] = 'Week';
+$string['topic'] = 'Topic';
+$string['action'] = 'Action';
