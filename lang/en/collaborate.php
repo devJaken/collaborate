@@ -92,3 +92,7 @@ $string['namechange'] = 'Change module name';
 //$string['week'] = 'Week';
 //$string['topic'] = 'Topic';
 $string['action'] = 'Action';
+
+$string['cancelled'] = 'Cancelled';
+$string['updated'] = 'Updated';
+$string['nocollaborates'] = 'No Collaborates';
