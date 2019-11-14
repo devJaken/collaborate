@@ -86,3 +86,6 @@ $string['gradingheader'] = 'Grade a submission';
 $string['currentgrade'] = 'Current grade: ';
 $string['user'] = 'User: ';
 $string['grade_saved'] = 'Grade saved';
+
+//Week 7 module name change
+$string['namechange'] = 'Change module name';

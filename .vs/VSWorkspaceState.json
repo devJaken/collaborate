@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\db"
+    "\\classes",
+    "\\classes\\local",
+    "\\templates"
   ],
-  "SelectedNode": "\\grading.php",
+  "SelectedNode": "\\classes\\local\\submission_form.php",
   "PreviewInSolutionExplorer": false
 }
