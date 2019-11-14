@@ -96,3 +96,4 @@ $string['action'] = 'Action';
 $string['cancelled'] = 'Cancelled';
 $string['updated'] = 'Updated';
 $string['nocollaborates'] = 'No Collaborates';
+$string['name'] = 'Name';
