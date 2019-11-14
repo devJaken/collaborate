@@ -38,25 +38,28 @@ class mod_collaborate_renderer extends plugin_renderer_base {
      * @param $cm the course module std Object
      * @return none
      */
-	public function render_view_page_content($collaborate, $cm, $reportstab=true) {
+    public function render_view_page_content($collaborate, $cm, $reportstab = false) {
 
-	    $data = new stdClass();
+        $data = new stdClass();
 
-	    $data->heading = $collaborate->title;
-	    // Moodle handles processing of std intro field.
-	    $data->body = format_module_intro('collaborate',
-	            $collaborate, $cm->id);
+        $data->heading = $collaborate->title;
 
-		// Show reports tab?
+        // Moodle handles processing of std intro field.
+        $data->body = format_module_intro('collaborate',
+                $collaborate, $cm->id);
+
+        // Show reports tab?
         $data->reportstab = $reportstab;
 
-	    // Set up the user page URLs.
-	    $a = new \moodle_url('/mod/collaborate/showpage.php', ['cid' => $collaborate->id, 'page' => 'a']);
-	    $b = new \moodle_url('/mod/collaborate/showpage.php', ['cid' => $collaborate->id, 'page' => 'b']);
-	    $data->url_a = $a->out(false);
-	    $data->url_b = $b->out(false);
+         // Set up the user page URLs.
+        $a = new \moodle_url('/mod/collaborate/showpage.php',
+                ['cid' => $collaborate->id, 'page' => 'a']);
+        $b = new \moodle_url('/mod/collaborate/showpage.php',
+                ['cid' => $collaborate->id, 'page' => 'b']);
+        $data->url_a = $a->out(false);
+        $data->url_b = $b->out(false);
 
-		// Add links to reports tabs, if enabled.
+        // Add links to reports tabs, if enabled.
         if ($reportstab) {
             $r = new \moodle_url('/mod/collaborate/reports.php',
                     ['cid' => $collaborate->id]);
@@ -65,13 +68,12 @@ class mod_collaborate_renderer extends plugin_renderer_base {
             $data->url_view = $v->out(false);
         }
 
-	    // Display the view page content.
-	    echo $this->output->header();
-	    echo $this->render_from_template('mod_collaborate/view', $data);
-	    echo $this->output->footer();
-	}
-
-	/**
+        // Display the view page content.
+        echo $this->output->header();
+        echo $this->render_from_template('mod_collaborate/view', $data);
+        echo $this->output->footer();
+    }
+    /**
      * Displays the submissions page (showpage.php).
      *
      * @param object $collaborate the collaborate instance std Object
@@ -80,7 +82,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
      * @param object $form the submission forms object
      * @return none
      */
-	public function render_page_content($collaborate, $cm, $page, $form) {
+     public function render_page_content($collaborate, $cm, $page, $form) {
 
          $data = new stdClass();
 
@@ -101,7 +103,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         $format = ($page == 'a') ? $collaborate->instructionsaformat : $collaborate->instructionsbformat;
         $data->body = format_text($content, $format, $formatoptions);
 
-		// Get the form html.
+        // Get the form html.
         $data->form = $form->render();
 
         $urlv = new \moodle_url('/mod/collaborate/view.php', ['id' => $cm->id]);
@@ -112,8 +114,8 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         echo $this->render_from_template('mod_collaborate/show', $data);
         echo $this->output->footer();
     }
-	/**
-     * Displays the reorts page (reports.php).
+    /**
+     * Displays the reports page (reports.php).
      *
      * @param object $collaborate the collaborate instance std Object
      * @param object $cm the course module std Object
@@ -140,8 +142,13 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         echo $this->render_from_template('mod_collaborate/reports', $data);
         echo $this->output->footer();
     }
-
-	public function render_submission_to_grade($submission, $context, $cid, $sid) {
+    /**
+     * Displays a submission to be graded
+     *
+     * @param object $submission the submission to grade
+     * @return none
+     */
+    public function render_submission_to_grade($submission, $context, $cid, $sid) {
 
         $data = new stdClass();
         $data->pageheader =  get_string('gradingheader', 'mod_collaborate');
@@ -164,8 +171,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         return $this->render_from_template('mod_collaborate/submissiontograde', $data);
 
     }
-
-	/**
+    /**
      * Displays the form to change a module name.
      *
      * @param object $mform the form to display
@@ -181,8 +187,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         echo $this->render_from_template('mod_collaborate/namechangeform', $data);
         echo $this->output->footer();
     }
-
-	/**
+    /**
      * Displays the list of collaborate modules in a course.
      *
      * @param array of objects $collaborates list of collaborate modules in course
@@ -226,11 +231,11 @@ class mod_collaborate_renderer extends plugin_renderer_base {
 
             $data->rows[] = $row;
         }
+
         // Display the table.
         echo $this->output->header();
         echo $this->render_from_template('mod_collaborate/namechangepage', $data);
         echo $this->output->footer();
 
     }
-
 }
