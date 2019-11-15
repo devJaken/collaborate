@@ -100,4 +100,4 @@ $string['name'] = 'Name';
 $string['edit'] = 'Edit';
 
 //adding a task
-$string['collaboratetask'] = 'Collaborate Task';
+$string['collaboratetask'] = 'Test Collaborate special';
