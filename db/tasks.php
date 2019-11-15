@@ -15,7 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
+ * Provides code to be executed during the module installation
+ *
+ * This file replaces the legacy STATEMENTS section in db/install.xml,
+ * lib.php/modulename_install() post installation hook and partially defaults.php.
  *
  * @package    mod_collaborate
  * @copyright  2019 Richard Jones richardnz@outlook.com
@@ -24,10 +27,25 @@
  * @see https://github.com/justinhunt/moodle-mod_collaborate
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'mod_collaborate'; //modified a comment
-$plugin->version = 20190615050;
-$plugin->release = 'v1.0'; // Basic activity plugin template.
-$plugin->requires = 2017111301; // Moodle 3.4, 3.5, 3.6, 3.7
-$plugin->maturity = MATURITY_BETA;
+/**
+ * Timing for the Developers Level 2 scheduled task
+ *
+ * @package    mod_collaborate
+ * @since      Moodle 2.7
+ * @copyright  2015 Flash Gordon http://www.flashgordon.com
+ *
+    @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+$tasks = array(
+  // The cron will run the specified task.
+  array('classname' => 'mod_collaborate\task\collaborate_scheduled',
+       
+    'blocking' => 0,
+        'minute' => '*/1',
+        'hour' => '*',
+        'day' => '*',
+       
+    'dayofweek' => '*',
+        'month' => '*'
+    )
+);

@@ -1,10 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\backup",
+    "\\backup\\moodle2",
     "\\classes",
     "\\classes\\local",
+    "\\lang",
+    "\\lang\\en",
     "\\templates"
   ],
-  "SelectedNode": "\\classes\\local\\submission_form.php",
+  "SelectedNode": "\\backup\\moodle2\\restore_collaborate_stepslib.php",
   "PreviewInSolutionExplorer": false
 }

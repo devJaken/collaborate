@@ -98,3 +98,6 @@ $string['updated'] = 'Updated';
 $string['nocollaborates'] = 'No Collaborates';
 $string['name'] = 'Name';
 $string['edit'] = 'Edit';
+
+//adding a task
+$string['collaboratetask'] = 'Collaborate Task';
