@@ -70,6 +70,8 @@ $string['collaborate:gradesubmission'] = 'Grade a submission';
 $string['submissionsave'] = 'Save submission';
 $string['submission'] = 'Your submission';
 $string['submissionupdated'] = 'Submission updated';
+$string['submission_submitted'] = 'Submission submitted';
+$string['submission_graded'] = 'Submission graded';
 
 // Strings for submission report.
 $string['submissions'] = 'List of submissions';

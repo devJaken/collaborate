@@ -36,11 +36,14 @@ class collaborate_grading_form extends moodleform {
         global $CFG;
         $mform = $this->_form;
 
-        // grades available.
+        // Grades available.
+
         $grades = array();
+
         for ($m = 0; $m <= 100; $m++) {
             $grades[$m] = '' . $m;
         }
+
         $mform->addElement('select', 'grade',
                 get_string('allocate_grade', 'mod_collaborate'),
                 $grades);
@@ -84,7 +87,7 @@ $reportsurl = new moodle_url('/mod/collaborate/reports.php', ['cid' => $cid]);
 
 // Get the submission information.
 $submission = submissions::get_submission_to_grade($collaborate, $sid);
-$mform = new collaborate_grading_form(null, ['cid' => $cid,'sid' => $sid]);
+$mform = new collaborate_grading_form(null, ['cid' => $cid, 'sid' => $sid]);
 
 if ($mform->is_cancelled()) {
     redirect($reportsurl, get_string('cancelled'), 2, notification::NOTIFY_INFO);
@@ -95,6 +98,14 @@ if ($data = $mform->get_data()) {
     $mform->set_data($data);
     // Update the submission data.
     submissions::update_grade($sid, $data->grade);
+
+    // Record the event.
+    $event = \mod_collaborate\event\submission_graded::create(
+            ['context' => $PAGE->context, 'objectid' => $PAGE->cm->instance]);
+    $event->add_record_snapshot('course', $PAGE->course);
+    $event->add_record_snapshot($PAGE->cm->modname, $collaborate);
+    $event->trigger();
+
     redirect($reportsurl, get_string('grade_saved', 'mod_collaborate'), 2,
             notification::NOTIFY_SUCCESS);
 }
