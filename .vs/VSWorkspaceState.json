@@ -1,13 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\classes",
-    "\\classes\\local",
-    "\\classes\\task",
-    "\\db",
+    "\\classes\\event",
     "\\lang",
     "\\lang\\en"
   ],
-  "SelectedNode": "\\version.php",
+  "SelectedNode": "\\lang\\en\\collaborate.php",
   "PreviewInSolutionExplorer": false
 }

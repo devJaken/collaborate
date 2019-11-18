@@ -64,7 +64,6 @@ $completion = new completion_info($course);
 $completion->set_module_viewed($cm);
 
 // Let's add the module viewed event.
-// Let's add the module viewed event.
 $event = \mod_collaborate\event\page_viewed::create(
         ['context' => $PAGE->context, 'objectid' => $PAGE->cm->instance]);
 $event->add_record_snapshot('course', $PAGE->course);

@@ -15,12 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Simple debugging class
+ * Page viewed events class
  *
  * @package    mod_collaborate
- * @copyright  2019 Prateek Chatterjee
+ * @copyright  2019 Richard Jones richardnz@outlook.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * Task 1 of Collaborate overview of base code
+ * @see https://github.com/moodlehq/moodle-mod_collaborate
+ * @see https://github.com/justinhunt/moodle-mod_collaborate
  */
 
 namespace mod_collaborate\event;
@@ -28,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class page_viewed extends \core\event\base {
     protected function init() {
-		$this->data['objecttable'] = 'collaborate';
+        $this->data['objecttable'] = 'collaborate';
         $this->data['crud'] = 'r';
         $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
     }
