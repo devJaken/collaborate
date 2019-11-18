@@ -33,8 +33,7 @@ require_once($CFG->dirroot . '/mod/collaborate/lib.php');
  * @copyright  2015 Flash Gordon http://www.flashgordon.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class collaborate_adhoc
-extends \core\task\adhoc_task {
+class collaborate_adhoc extends \core\task\adhoc_task {
 
 
      /**
