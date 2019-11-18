@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class page_viewed extends \core\event\base {
     protected function init() {
+		$this->data['objecttable'] = 'collaborate';
         $this->data['crud'] = 'r';
         $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
     }
