@@ -28,9 +28,10 @@
  * @copyright  2019 Richard Jones richardnz@outlook.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @see https://github.com/moodlehq/moodle-mod_collaborate
- * @see https://github.com/justinhunt/moodle-mod_collaborate */
+ * @see https://github.com/justinhunt/moodle-mod_collaborate
+ */
 
-use \mod_collaborate\local\collaborate_editor;
+use mod_collaborate\local\collaborate_editor;
 defined('MOODLE_INTERNAL') || die();
 
 /* Moodle core API */
@@ -54,10 +55,34 @@ function collaborate_supports($feature) {
             return false;
         case FEATURE_BACKUP_MOODLE2:
             return true;
-		case FEATURE_COMPLETION_TRACKS_VIEWS:
-             return true;
+        case FEATURE_COMPLETION_TRACKS_VIEWS:
+            return true;
         default:
             return null;
+    }
+}
+
+/**
+ * A task called from scheduled or adhoc
+ *
+ * @param progress_trace trace object
+ *
+ */
+function collaborate_dotask(progress_trace $trace) {
+    $trace->output('executing dotask');
+}
+
+/**
+ * A task called from adhoc
+ *
+ * @param progress_trace trace object
+ * @param $data - form data to update a database record
+ */
+function collaborate_do_adhoc_task(progress_trace $trace, $data) {
+    global $DB;
+    $trace->output('executing dotask');
+    if ($DB->record_exists('collaborate', array('id' => $data->id))) {
+        $DB->update_record('collaborate', $data);
     }
 }
 
@@ -79,9 +104,9 @@ function collaborate_add_instance(stdClass $collaborate, mod_collaborate_mod_for
     $collaborate->timecreated = time();
 
     // Add new instance with dummy data for the editor fields.
-    $collaborate->instructionsa ='a';
+    $collaborate->instructionsa = 'a';
     $collaborate->instructionsaformat = FORMAT_HTML;
-    $collaborate->instructionsb ='b';
+    $collaborate->instructionsb = 'b';
     $collaborate->instructionsbformat = FORMAT_HTML;
 
     $collaborate->id = $DB->insert_record('collaborate', $collaborate);
@@ -94,7 +119,7 @@ function collaborate_add_instance(stdClass $collaborate, mod_collaborate_mod_for
     $names = collaborate_editor::get_editor_names();
 
     foreach ($names as $name) {
-        $collaborate =  file_postupdate_standard_editor($collaborate, $name, $options,
+        $collaborate = file_postupdate_standard_editor($collaborate, $name, $options,
                 $context, 'mod_collaborate', $name, $collaborate->id);
     }
 
@@ -128,7 +153,7 @@ function collaborate_update_instance(stdClass $collaborate, mod_collaborate_mod_
     $names = collaborate_editor::get_editor_names();
 
     foreach ($names as $name) {
-        $collaborate =  file_postupdate_standard_editor($collaborate, $name, $options,
+        $collaborate = file_postupdate_standard_editor($collaborate, $name, $options,
                 $context, 'mod_collaborate', $name, $collaborate->id);
 
     }
@@ -158,11 +183,6 @@ function collaborate_refresh_events($courseid = 0) {
         if (!$collaborates = $DB->get_records('collaborate', array('course' => $courseid))) {
             return true;
         }
-    }
-
-    foreach ($collaborates as $collaborate) {
-        // Create a function such as the one below to deal with updating calendar events.
-        // collaborate_update_events($collaborate);
     }
 
     return true;
@@ -408,8 +428,9 @@ function collaborate_update_grades(stdClass $collaborate, $userid = 0) {
 function collaborate_get_file_areas($course, $cm, $context) {
     return ['instructionsa' => 'Instructions for partner A',
             'instructionsb' => 'Instructions for partner B',
-            'submissions' => 'Student submissions'];
+            'submissions' => 'For student submissions'];
 }
+
 /**
  * File browsing support for collaborate file areas
  *
@@ -445,8 +466,7 @@ function collaborate_get_file_info($browser, $areas, $course, $cm, $context, $fi
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-
- function collaborate_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
+function collaborate_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
     global $DB, $CFG;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -490,31 +510,13 @@ function collaborate_extend_navigation(navigation_node $navref, stdClass $course
  * @param settings_navigation $settingsnav complete settings navigation tree
  * @param navigation_node $collaboratenode collaborate administration node
  */
-function collaborate_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $collaboratenode=null) {
-    global $PAGE;
-    $namechange_url = new moodle_url('/mod/collaborate/namechanger.php',['courseid'=>$PAGE->course->id]);
-    $collaboratenode->add(get_string('namechange', 'mod_collaborate'), $namechange_url);
-}
-/**
- * A task called from scheduled or adhoc
- *
- * @param progress_trace trace object
- *
- */
-function collaborate_dotask(progress_trace $trace) {
-    $trace->output('executing dotask');
-}
+function collaborate_extend_settings_navigation(settings_navigation $settingsnav,
+        navigation_node $collaboratenode = null) {
 
-/**
- * A task called from adhoc
- *
- * @param progress_trace trace object
- * @param $data - form data to update a database record
- */
-function collaborate_do_adhoc_task(progress_trace $trace, $data) {
-    global $DB;
-    $trace->output('executing dotask');
-    if ($DB->record_exists('collaborate', array('id' => $data->id))) {
-        $DB->update_record('collaborate', $data);
-    }
+    global $PAGE;
+
+    $namechangeurl = new moodle_url('/mod/collaborate/namechanger.php',
+            ['courseid' => $PAGE->course->id]);
+
+    $collaboratenode->add(get_string('namechange', 'mod_collaborate'), $namechangeurl);
 }

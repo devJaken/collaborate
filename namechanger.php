@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,7 +24,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 require_once($CFG->libdir . '/formslib.php');
@@ -44,8 +42,9 @@ class collaborate_namechanger_form extends moodleform {
 
         $mform = $this->_form;
 
-        // Adding the standard "name" field
-        $mform->addElement('text', 'name', get_string('collaboratename', 'mod_collaborate'), array('size'=>'64'));
+        // Adding the standard "name" field.
+        $mform->addElement('text', 'name', get_string('collaboratename', 'mod_collaborate'),
+                array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -55,26 +54,27 @@ class collaborate_namechanger_form extends moodleform {
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
         $mform->addHelpButton('name', 'collaboratename', 'mod_collaborate');
 
-        $mform->addElement('hidden','courseid');
-        $mform->setType('courseid',PARAM_INT);
-        $mform->addElement('hidden','id');
-        $mform->setType('id',PARAM_INT);
+        $mform->addElement('hidden', 'courseid');
+        $mform->setType('courseid', PARAM_INT);
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
+
         $this->add_action_buttons();
 
     }
 }
 
-//fetch URL parameters
-$courseid = required_param('courseid', PARAM_INT);   // course
-$action = optional_param('action','list',PARAM_TEXT);
-$actionitem = optional_param('actionitem',0,PARAM_INT);
+// Fetch URL parameters.
+$courseid = required_param('courseid', PARAM_INT);   // course.
+$action = optional_param('action', 'list', PARAM_TEXT);
+$actionitem = optional_param('actionitem', 0, PARAM_INT);
 
-//Set course related variables
+// Set course related variables.
 $course = $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
 require_course_login($course);
 $coursecontext = context_course::instance($course->id);
 
-//set up the page
+// Set up the page.
 $PAGE->set_url('/mod/collaborate/namechanger.php', array('courseid' => $courseid));
 $PAGE->set_title(format_string($course->fullname));
 $PAGE->set_heading(format_string($course->fullname));
@@ -86,32 +86,31 @@ $mform = new collaborate_namechanger_form();
 
 // Cancelled, redirect.
 if ($mform->is_cancelled()) {
-    redirect($PAGE->url, get_string('cancelled'),2);
+    redirect($PAGE->url, get_string('cancelled'), 2);
     exit;
 }
 
-//if we have data, then our job here is to save it and return
+// If we have data save it and return.
 if ($data = $mform->get_data()) {
-        
-        // $DB->update_record('collaborate',$data);
-        
-        // Replace update with call to ad_hoc task
-        $updatetask = new \collaborate\task\collaborate_adhoc();
-        $updatetask->set_custom_data($data);
-        \core\task\manager::queue_adhoc_task($updatetask);
-        redirect($PAGE->url,get_string('updated','core',$data->name),2);
+    // $DB->update_record('collaborate',$data);
+    // Replace update with call to ad_hoc task.
+    $updatetask = new \mod_collaborate\task\collaborate_adhoc();
+    $updatetask->set_custom_data($data);
+            \core\task\manager::queue_adhoc_task($updatetask);
+
+    redirect($PAGE->url, get_string('updated', 'core', $data->name), 2);
 }
 
 $renderer = $PAGE->get_renderer('mod_collaborate');
 
 // If the action is "edit" show the edit form.
-if($action =="edit"){
+if ($action == "edit") {
     // Create some data for our form.
     $data = new stdClass();
     $data->courseid = $courseid;
-    $collaborate = $DB->get_record('collaborate', ['id'=>$actionitem]);
-    if(!$collaborate) {
-        redirect($PAGE->url,'nodata',2);
+    $collaborate = $DB->get_record('collaborate', ['id' => $actionitem]);
+    if (!$collaborate) {
+        redirect($PAGE->url,'nodata', 2);
     }
     $data->id = $collaborate->id;
     $data->name = $collaborate->name;
@@ -125,7 +124,8 @@ if($action =="edit"){
 
 // Check if this course has collaborate modules present.
 if (!$collaborates = get_all_instances_in_course('collaborate', $course)) {
-    notice(get_string('nocollaborates', 'collaborate'), new moodle_url('/course/view.php', array('id' => $course->id)));
+    notice(get_string('nocollaborates', 'collaborate'), new moodle_url('/course/view.php',
+            array('id' => $course->id)));
 }
 
 // Call renderer to output list of collaborate activities.

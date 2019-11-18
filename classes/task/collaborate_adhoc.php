@@ -12,21 +12,19 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>;.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Class providing custom editors
+ * Class for the collaborate ad hoc task
  *
- * @package   mod_simplelesson
+ * @package   mod_collaborate
  * @copyright 2018 Richard Jones https://richardnz.net
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-
 namespace mod_collaborate\task;
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/mod/collaborate/lib.php');
 /**
- * A adhoc task.
+ * An ad hoc task.
  *
  * @package    mod_collaborate
  * @since      Moodle 2.7
@@ -35,13 +33,9 @@ require_once($CFG->dirroot . '/mod/collaborate/lib.php');
  */
 class collaborate_adhoc extends \core\task\adhoc_task {
 
-
-     /**
-     *  Run all the tasks
-     */
-     public function execute(){
+    public function execute() {
         $trace = new \text_progress_trace();
-        $cd =  $this->get_custom_data();;
-            collaborate_do_adhoc_task($trace, $cd);
+        $cd = $this->get_custom_data();
+        collaborate_do_adhoc_task($trace, $cd);
     }
 }
