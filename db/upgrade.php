@@ -81,6 +81,13 @@ function xmldb_collaborate_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 20190615090, 'collaborate');
     }
 
+    	  if ($oldversion < 20190615100) {
+	 
+
+        // Collaborate savepoint reached.
+        upgrade_mod_savepoint(true, 20190615100, 'collaborate');
+    }
+
 
     return true;
 }
