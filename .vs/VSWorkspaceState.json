@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\backup",
-    "\\backup\\moodle2"
+    "\\classes",
+    "\\classes\\event",
+    "\\classes\\local"
   ],
-  "SelectedNode": "\\backup\\moodle2\\backup_collaborate_activity_task.class.php",
+  "SelectedNode": "\\index.php",
   "PreviewInSolutionExplorer": false
 }
