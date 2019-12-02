@@ -158,7 +158,7 @@ class mod_collaborate_renderer extends plugin_renderer_base {
         $data->grade = $submission->grade;
         // Submission.
         $content = file_rewrite_pluginfile_urls($submission->submission, 'pluginfile.php', $context->id,
-                'mod_collaborate', 'submissions', $sid);
+                'mod_collaborate', 'submission', $sid);
 
         // Format submission.
         $formatoptions = new stdClass;
